@@ -24,7 +24,7 @@ This bot uses Rasa's NLU to understand user messages and Rasa Core to manage the
 
 ---
 
-# 🧭 Step-by-Step Setup Guide
+# Step-by-Step Setup Guide
 
 Follow this guide in exact order to get your bot running locally and connected to WhatsApp.
 
