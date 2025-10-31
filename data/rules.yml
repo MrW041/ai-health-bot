@@ -1,0 +1,68 @@
+version: "3.1"
+#now
+rules:
+
+- rule: Detect user language on every message
+  steps:
+  - action: action_detect_language
+
+- rule: Greet
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say Thank You
+  steps:
+  - intent: thankyou
+  - action: utter_thankyou_response
+
+- rule: Bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+# This rule handles when the bot understands the user, but the topic is wrong.
+- rule: Handle out of scope questions
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+# This rule handles when the bot does NOT understand the user at all.
+- rule: Handle nlu_fallback
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase
+
+# --- NEW RULES TO FIX TEST FAILURES ---
+
+- rule: Handle direct questions with disease entity
+  # This rule forces the bot to answer directly if a disease is provided.
+  condition:
+  - slot_was_set:
+    - disease: true
+  steps:
+  - intent: ask_symptoms
+  - action: action_find_answer
+
+- rule: Handle direct about questions with disease entity
+  # This rule does the same for the "ask_about" intent.
+  condition:
+  - slot_was_set:
+    - disease: true
+  steps:
+  - intent: ask_about
+  - action: action_find_answer
+
+- rule: Handle outbreak status with location entity
+  # This rule forces the bot to check for outbreaks if a location is provided.
+  condition:
+  - slot_was_set:
+    - location: true
+  steps:
+  - intent: ask_outbreak_status
+  - action: action_check_outbreaks
