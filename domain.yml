@@ -1,0 +1,86 @@
+version: "3.1"
+#now
+
+intents:
+  - ask_about
+  - ask_cure
+  - greet
+  - inform
+  - goodbye
+  - thankyou
+  - affirm
+  - deny
+  - bot_challenge
+  - out_of_scope
+  - ask_symptoms
+  - ask_prevention
+  - ask_transmission
+  - ask_vaccine
+  - ask_risk_factors
+  - ask_misconceptions
+  - ask_outbreak_status
+
+entities:
+  - disease
+  - location
+slots:
+
+  user_language:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+
+  disease:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: disease
+  location:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: location
+
+actions:
+  - action_detect_language
+  - action_find_cure
+  - action_find_answer
+  - action_check_outbreaks
+
+responses:
+
+  utter_ask_confirmation:
+    - text: "Just to be sure, are you asking about {disease}?"
+
+  utter_medical_advice_disclaimer:
+    - text: "As an AI assistant, I cannot provide medical advice on cures. For accurate and safe information about treatment and cures, it is essential to consult a qualified healthcare professional."
+
+  utter_please_rephrase:
+    - text: "I didn't get the question, please rephrase the question."
+
+  utter_greet:
+    - text: "Hello! I am your health assistant. How can I help you today?   Note: I am not a doctor. I can share general health info. For emergencies, visit a doctor. "
+
+  utter_goodbye:
+    - text: "Stay healthy. Goodbye!"
+
+  utter_thankyou_response:
+    - text: "You're welcome! Is there anything else I can help with?"
+
+  utter_iamabot:
+    - text: "I am an AI health assistant here to answer your queries made by Root Devs.  Note: I am not a doctor. I can share general health info. For emergencies, visit a doctor. "
+    - text: "I’m your AI health guide, here to provide reliable information developed by Root Devs.   Note: I am not a doctor. I can share general health info. For emergencies, visit a doctor. "
+    - text: "I am an AI assistant designed to provide health information, Trained by Root Devs.   Note: I am not a doctor. I can share general health info. For emergencies, visit a doctor. "
+
+  utter_out_of_scope:
+    - text: "I'm sorry, I can only answer questions about health, diseases, and wellness. How can I help you with those topics?"
+
+  utter_ask_disease:
+    - text: "I can help with that. Which disease are you asking about?"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

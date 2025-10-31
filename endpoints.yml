@@ -1,0 +1,5 @@
+# This file contains the address of your custom action server.
+#now
+
+action_endpoint:
+  url: "http://localhost:5055/webhook"
