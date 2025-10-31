@@ -1,0 +1,166 @@
+version: "3.1"
+#now
+
+stories:
+
+# This story models a simple, direct question from the user.
+- story: Happy Path - Simple direct question
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_symptoms
+    entities:
+    - disease: "Typhoid"
+  - action: action_find_answer
+  - intent: goodbye
+  - action: utter_goodbye
+
+# This story teaches the bot to handle a longer conversation with multiple follow-up questions about the same topic.
+- story: Happy Path - Multi-turn follow-up questions
+  steps:
+  - intent: ask_prevention
+    entities:
+    - disease: "Cancer"
+  - action: action_find_answer
+  - intent: ask_risk_factors   # Follow-up 1 (no entity)
+  - action: action_find_answer
+  - intent: ask_misconceptions # Follow-up 2 (no entity)
+  - action: action_find_answer
+
+# This story teaches the bot how to ask for more information when the user is not specific enough.
+- story: Interactive Path - Bot asks for disease
+  steps:
+  - intent: ask_transmission  # User doesn't provide a disease
+  - action: utter_ask_disease
+  - intent: inform
+    entities:
+    - disease: "Diphtheria"
+  - action: action_find_answer
+  - intent: ask_vaccine       # A follow-up after the interactive flow
+  - action: action_find_answer
+
+# This story teaches the bot how to ask for confirmation and what to do when the user says "yes".
+- story: Confirmation Path - User Affirms
+  steps:
+  - intent: ask_symptoms  # User might have a typo, e.g., "symtoms of pyles"
+  - action: utter_ask_confirmation
+  - intent: affirm        # User says "yes"
+  - action: action_find_answer
+
+# This story teaches the bot how to ask for confirmation and what to do when the user says "no".
+- story: Confirmation Path - User Denies
+  steps:
+  - intent: ask_transmission # User might have a typo
+  - action: utter_ask_confirmation
+  - intent: deny           # User says "no"
+  - action: utter_please_rephrase
+
+# This story teaches the bot how to correctly update its memory when the user changes the topic.
+- story: Conversation with Topic Switch
+  steps:
+  - intent: ask_symptoms
+    entities:
+    - disease: "Chickenpox"
+  - action: action_find_answer
+  - intent: ask_prevention       # This follow-up is about Chickenpox
+  - action: action_find_answer
+  - intent: ask_symptoms
+    entities:
+    - disease: "Malaria"       # User switches the topic to Malaria
+  - action: action_find_answer
+  - intent: ask_transmission   # This follow-up should now be about Malaria
+  - action: action_find_answer
+
+# This story covers the "ask_about" and "ask_cure" intents in a single conversation.
+- story: Happy Path for About and Cure
+  steps:
+  - intent: ask_about
+    entities:
+    - disease: "Diabetes"
+  - action: action_find_answer
+  - intent: ask_cure          # Follow-up about cure
+  - action: action_find_cure
+  - intent: thankyou
+  - action: utter_thankyou_response
+
+# This story covers the interactive flow for the new "ask_about" intent.
+- story: Interactive Path for About
+  steps:
+  - intent: ask_about
+  - action: utter_ask_disease
+  - intent: inform
+    entities:
+    - disease: "COVID-19"
+  - action: action_find_answer
+
+# This story covers the bot's outbreak checking feature.
+- story: Outbreak Status Path
+  steps:
+  - intent: ask_outbreak_status
+    entities:
+    - location: "Cuttack"
+  - action: action_check_outbreaks
+
+# --- NEW STORIES TO FIX TEST FAILURES ---
+# The stories below are added to resolve the errors found during `rasa test`.
+
+- story: Reinforce direct outbreak check
+  # This story helps the bot learn to ALWAYS run `action_check_outbreaks`
+  # after the `ask_outbreak_status` intent.
+  steps:
+  - intent: ask_outbreak_status
+    entities:
+    - location: "Puri"
+  - action: action_check_outbreaks
+
+- story: Reinforce direct question with entity
+  # This story helps the bot distinguish between asking a question WITH a
+  # disease and without one, preventing it from incorrectly asking for the disease.
+  steps:
+  - intent: ask_about
+    entities:
+    - disease: "Malaria"
+  - action: action_find_answer
+
+- story: Reinforce follow-up questions
+  # This story provides a longer example of a multi-turn conversation
+  # to teach the bot that follow-up questions are expected.
+  steps:
+  - intent: ask_symptoms
+    entities:
+    - disease: "Dengue"
+  - action: action_find_answer
+  - intent: ask_prevention
+  - action: action_find_answer
+  - intent: ask_cure
+  - action: action_find_cure
+
+
+- story: Another direct question path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_about
+    entities:
+    - disease: "Chickenpox"
+  - action: action_find_answer
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: Another follow-up question path
+  steps:
+  - intent: ask_prevention
+    entities:
+    - disease: "Tuberculosis (TB)"
+  - action: action_find_answer
+  - intent: ask_transmission
+  - action: action_find_answer
+
+- story: Another outbreak check path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_outbreak_status
+    entities:
+    - location: "Bhubaneswar"
+  - action: action_check_outbreaks
