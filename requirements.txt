@@ -1,0 +1,17 @@
+# --- Core Rasa Framework ---
+rasa==3.6.20
+rasa-sdk==3.6.2
+
+# --- Messaging & Communication ---
+twilio==9.3.2          # WhatsApp / SMS integration
+requests==2.32.3       # For fetching outbreak data or APIs
+
+# --- Web Scraping ---
+beautifulsoup4==4.12.3
+lxml==5.3.0
+
+# --- Data Handling ---
+pandas==2.2.3
+
+# --- Environment Variables ---
+python-dotenv==1.0.1
