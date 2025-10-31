@@ -13,7 +13,7 @@ The bot is designed to be fully interactive via **WhatsApp** using the Twilio AP
 * **Region-Specific:** The outbreak feature is currently configured to fetch data for **Odisha, India**, but the scraper can be customized.
 * **WhatsApp Ready:** Built from the ground up to connect to WhatsApp via Twilio, allowing users to interact from their favorite messaging app.
 
-##  How It Works
+## How It Works
 
 This bot uses Rasa's NLU to understand user messages and Rasa Core to manage the conversation.
 * **Custom Actions (`actions.py`):** Handle all the complex logic, such as:
@@ -22,67 +22,148 @@ This bot uses Rasa's NLU to understand user messages and Rasa Core to manage the
 * **Twilio Connector:** Uses the built-in Rasa connector to send and receive messages from the Twilio WhatsApp API.
 * **Ngrok (for Development):** Exposes the local Rasa server to the public internet, allowing Twilio's webhooks to connect to your development machine.
 
-## Setup & Installation
+---
 
-Follow these steps to get your local development environment set up.
+# 🧭 Step-by-Step Setup Guide
 
-**1. Clone the Repository**
+Follow this guide in exact order to get your bot running locally and connected to WhatsApp.
+
+---
+
+### 1. Clone the Repository
 ```bash
-git clone [https://github.com/MrW041/ai-health-bot.git](https://github.com/MrW041/ai-health-bot.git)
+git clone https://github.com/MrW041/ai-health-bot.git
+cd ai-health-bot
+```
 
-**2. Create a virtual environment**
+---
+
+### 2. Create and Activate Virtual Environment
+```bash
 # For Windows
 python -m venv venv
-.\venv\Scripts\activate
+.
+env\Scripts ctivate
 
 # For macOS/Linux
 python3 -m venv venv
 source venv/bin/activate
+```
 
-**Note: Install the RASA inside the .venv**
+> **Note:** Install Rasa inside this virtual environment (`venv`).
 
-**3. Train the RASA Model**
-Note: Train the model after you have used to replace the files with the files given in the repository.
-# run in the terminal:
-      >> rasa train
+---
 
-**4. Adding Credentials**
-# Open the credentials.yml in the venv where the project files are placed.
+### 3. Install Required Packages
+```bash
+pip install -r requirements.txt
+```
+If there’s no `requirements.txt`, run:
+```bash
+pip install rasa rasa-sdk
+```
 
-# Add the following in the last of your credentials.yml:
-      twilio:
-        account_sid: "YOUR_TWILIO_ACCOUNT_SID_HERE"
-        auth_token: "YOUR_TWILIO_AUTH_TOKEN_HERE"
-        twilio_number: "whatsapp:+1234567890"  # Your Twilio WhatsApp Number
-  Note: Make sure to change the account_sid, auth_token, twilio_number.
+---
 
-**5. Running The Bot**
-# Running the bot Locally:
-    run:
-        >> rasa run actions
-        >> rasa shell
-# Running the bot through WhatsApp:
+### 4. Train the RASA Model
+Replace any placeholder files if needed, then train:
+```bash
+rasa train
+```
 
-'''open 2 terminals for this process'''
-terminal_1:
-  >> rasa run actions
-terminal_2:
-  >> ngrok http 5005
+---
 
-Note: Make sure the Twilio is connected successfully to the ngrok generated link
-if not:
-    1. After running Ngrok, it will give you a Forwarding URL that looks like https://abcdef123.ngrok.io. Copy this HTTPS URL.
+### 5. Add Twilio Credentials
+Open the file `credentials.yml` in your project directory (inside `venv`).
 
-    2. Go to your Twilio Dashboard > Messaging > Settings > WhatsApp Sandbox Settings.
+Add this at the bottom:
+```yaml
+twilio:
+  account_sid: "YOUR_TWILIO_ACCOUNT_SID_HERE"
+  auth_token: "YOUR_TWILIO_AUTH_TOKEN_HERE"
+  twilio_number: "whatsapp:+1234567890"  # Your Twilio WhatsApp Number
+```
 
-    3. In the field labeled "WHEN A MESSAGE COMES IN", paste your Ngrok URL and add /webhooks/twilio/webhook to the end of it.
+> Make sure to replace the credentials with your real Twilio details.
 
-    4. The final URL should look like this: https://abcdef123.ngrok.io/webhooks/twilio/webhook
+---
 
-    5. Set the method to HTTP POST.
+### 6. (Optional) Set Environment Variables
+Instead of saving secrets in `credentials.yml`, you can export them as environment variables:
+```bash
+export TWILIO_ACCOUNT_SID="YOUR_TWILIO_ACCOUNT_SID_HERE"
+export TWILIO_AUTH_TOKEN="YOUR_TWILIO_AUTH_TOKEN_HERE"
+export TWILIO_NUMBER="whatsapp:+1234567890"
+```
 
-    6. Click Save.
+---
 
+### 7. Run the Bot Locally
+Open **two terminals**:
+
+**Terminal 1:**
+```bash
+rasa run actions
+```
+
+**Terminal 2:**
+```bash
+rasa shell
+```
+
+This lets you chat with the bot locally before connecting to WhatsApp.
+
+---
+
+### 8. Connect to WhatsApp (via Twilio + Ngrok)
+
+**Step 1:** Run Ngrok to expose your local Rasa server.
+```bash
+ngrok http 5005
+```
+
+**Step 2:** Copy the HTTPS forwarding URL from the Ngrok output, e.g.:
+```
+https://abcdef123.ngrok.io
+```
+
+**Step 3:** Go to your **Twilio Dashboard → Messaging → Settings → WhatsApp Sandbox Settings.**
+
+**Step 4:** In the field “WHEN A MESSAGE COMES IN”, paste:
+```
+https://abcdef123.ngrok.io/webhooks/twilio/webhook
+```
+
+**Step 5:** Set the method to `HTTP POST` and click **Save**.
+
+---
+
+### 9. Start Full WhatsApp Connection
+Open **two terminals** again.
+
+**Terminal 1:**
+```bash
+rasa run actions
+```
+
+**Terminal 2:**
+```bash
+rasa run --enable-api
+```
+
+Keep Ngrok running in a separate terminal.  
+Now send a WhatsApp message to your Twilio Sandbox number — the bot should reply.
+
+---
+
+### 10. Debug Checklist
+If WhatsApp messages don’t reach the bot:
+- Ensure both `rasa run` and `rasa run actions` are active.
+- Verify Ngrok is running and URL is pasted correctly in Twilio.
+- Check Twilio logs for webhook errors.
+- Confirm Rasa server is on port 5005.
+
+---
 
 ## 🚧 Project Roadmap
 
@@ -92,11 +173,9 @@ This project is still in development. Future plans and features under considerat
 * **Expanded Knowledge Base:** Adding more diseases and health topics.
 * **Deployment:** Moving from Ngrok to a more permanent hosting solution.
 
-
 ## 📜 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for full details.
-
 
 ## 👤 Author & Acknowledgments
 
@@ -104,4 +183,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 * **Acknowledgments:**
     * This bot was built using the amazing open-source [Rasa](https://rasa.com/) framework.
     * Live outbreak data is sourced from the [IDSP, Ministry of Health & Family Welfare, India](https://idsp.mohfw.gov.in/index4.php?lang=1&level=0&linkid=406&lid=3689).
-
