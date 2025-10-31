@@ -1,1 +1,595 @@
-
+version: "3.1"
+nlu:
+#now
+- intent: ask_symptoms
+  examples: |
+    - what are the signs of [Malnutrition](disease)
+    - symptoms for [COVID-19](disease=covid_19)
+    - tell me the symptoms of [Diabetes](disease)
+    - What are the symptoms of(disease)?
+    - Can you list the signs for(disease)?
+    - Tell me the symptoms of [Kala-azar](disease).
+    - What are the warning signs for(disease)?
+    - How can I tell if I have [Chickenpox](disease)?
+    - What signs should I look out for with(disease)?
+    - How do I know if it's(disease) or something else?
+    - What does [Cancer](disease) look like in the early stages?
+    - If a person feels weak, could it be(disease)?
+    - My child has a high fever, could it be(disease)?
+    - I'm worried I might have [Piles](disease), what are the indicators?
+    - What kind of problems are caused by(disease)?
+    - Do people with(disease) get sick often?
+    - What are its symptoms?
+    - Tell me about the symptoms.
+    - What are the signs?
+    - How can I know if I have it?
+    - What should I look out for?
+    - Can you describe the usual symptoms?
+    - Are there any warning signs?
+    - How does it normally start?
+    - What are the most common symptoms?
+    - How would I feel if I had it?
+- intent: ask_prevention
+  examples: |
+    - how to prevent [Malnutrition](disease)
+    - prevention tips for [COVID-19](disease=covid_19)
+    - can I avoid [Diabetes](disease)?
+    - How can I prevent [Typhoid](disease)?
+    - What are the best ways to stay safe from [Cancer](disease)?
+    - Tell me the preventive measures for [Diphtheria](disease).
+    - How do I avoid getting [Piles](disease)?
+    - What precautions should I take against [Malaria](disease)?
+    - Can [COVID-19](disease) be prevented?
+    - Is there a way to protect myself from [Dengue](disease)?
+    - How do I reduce my risk of [Stroke](disease)?
+    - What steps should be taken to stop the spread of [AIDS](disease)?
+    - Are there vaccines or treatments to prevent [Measles](disease)?
+    - How do I protect children from [Chickenpox](disease)?
+    - What should parents do to prevent [HFMD / Tomato Flu](disease)?
+    - What habits help reduce the chances of [Diabetes](disease)?
+    - Are there lifestyle changes to avoid [Cardiovascular Disease](disease)?
+    - Is hygiene important for preventing [Diarrheal Diseases](disease)?
+    - prevention tips for [AES](disease)
+    - how to avoid [Scabies](disease)
+    - How can I avoid it?
+    - What are the preventive measures?
+    - What should I do to protect myself?
+    - How do I stay safe?
+    - What are the best prevention tips?
+    - Can lifestyle changes help prevent it?
+    - What should I avoid to stay safe?
+    - Is vaccination a form of prevention?
+    - What daily practices help in prevention?
+    - How do I protect myself from getting sick?
+- intent: ask_transmission
+  examples: |
+    - How is [Typhoid](disease) transmitted?
+    - What are the main ways [AES (Chamki Bukhar)](disease) spreads?
+    - Can you explain how [Diphtheria](disease) is spread?
+    - Is [Bird Flu](disease) passed from poultry to humans?
+    - What insect spreads [Kala-azar](disease)?
+    - How does [HFMD / Tomato Flu](disease) spread among kids?
+    - Can you catch [Cancer](disease) from someone else?
+    - What is the main transmission route of [AIDS](disease)?
+    - Is [Piles](disease) contagious?
+    - How does [Chickenpox](disease) spread so easily?
+    - Can [COVID-19](disease) spread through the air
+    - Is [Malaria](disease) transmitted by mosquitoes?
+    - Can [Tuberculosis](disease) spread through coughing?
+    - so you can't get [AIDS](disease) from a toilet seat?  
+    - how long is someone with [Measles](disease) contagious for? 
+    - How does it spread?
+    - Is it contagious?
+    - Can it be transmitted from person to person?
+    - What is the most common transmission route?
+    - Can animals pass it to humans?
+    - Is it airborne or droplet-spread?
+    - How do people usually catch it?
+    - Can surfaces or objects spread it?
+    - Is close contact enough for transmission?
+    - how long is the contagious period?         
+    - is it transmissible before symptoms show?
+    - Which age group is most likely to get [HFMD / Tomato Flu](disease)?
+- intent: ask_vaccine
+  examples: |
+    - Is there a vaccine for [Typhoid](disease)?
+    - Can I get vaccinated against [AES (Chamki Bukhar)](disease)?
+    - What shots are given for [Diphtheria](disease)?
+    - Has a [Bird Flu](disease) vaccine been developed?
+    - Is there any vaccine for [Kala-azar](disease)?
+    - Can [HFMD / Tomato Flu](disease) be prevented with vaccination?
+    - Can you get vaccinated for [Cancer](disease)?
+    - Do they have a vaccine for [AIDS](disease) yet?
+    - What is the vaccine for [Chickenpox](disease)?
+    - Can [COVID-19](disease) vaccination prevent infection?
+    - How effective is the [Malaria](disease) vaccine?
+    - Do children get the [Measles](disease) vaccine?
+    - Is there a vaccine for it?
+    - Can I get vaccinated?
+    - What is the name of the vaccine??
+    - How effective is the vaccine?
+    - Is vaccination safe?
+    - Are there side effects of the vaccines?
+    - How long does protection last?
+    - Can I still get sick after vaccination?
+    - Does the vaccine stop transmission?
+    - Can vaccines prevent outbreaks?
+    - What type of vaccine is it?
+    - Do kids get vaccinated for this?
+    - Is adult vaccination recommended?
+    - Is it part of routine immunization?
+    - Do I need a booster shot?
+- intent: ask_risk_factors
+  examples: |
+    - Who is at risk of getting [Typhoid](disease)?
+    - What are the risk factors for [AES (Chamki Bukhar)](disease)?
+    - Who is most vulnerable to [Diphtheria](disease)?
+    - Does poultry exposure increase [Bird Flu](disease) risk?
+    - Are poor communities more at risk of [Kala-azar](disease)?
+    - Does smoking increase [Cancer](disease) risk?
+    - What behaviors increase [AIDS (hiv)](disease) risk?
+    - Is constipation a risk factor for [Piles](disease)?
+    - Are adults more at risk from [Chickenpox](disease)?
+    - Does family history affect my risk for [Cancer](disease)?           
+    - Are farmers at higher risk for [Bird Flu](disease)?         
+    - Does having [Diabetes](disease) increase the risk of [Stroke](disease)? 
+    - Who is most at risk?
+    - What are the main risk factors?
+    - Who is vulnerable to this disease?
+    - Are children more at risk?
+    - Are elderly people vulnerable?
+    - Does poor sanitation increase the chances?
+    - Can travel raise the risk?
+    - Which groups of people should be more cautious?
+    - Is it hereditary?                                   
+    - Do my other health problems put me at risk?         
+- intent: ask_misconceptions
+  examples: |
+    - What are some common myths about [Typhoid](disease)?
+    - Tell me a misconception about [Typhoid](disease).
+    - Is [HFMD / Tomato Flu](disease) related to tomatoes? 
+    - Is it true that sugar directly feeds [Cancer](disease)?
+    - Do people wrongly believe [Cancer](disease is always fatal?
+    - Can you get [AIDS (hiv)](disease) from hugging?
+    - Is it a myth that only elderly people get [Piles](disease)?
+    - Do people wrongly think [Chickenpox](disease) is harmless?
+    - What are common misconceptions about it?
+    - Are there any myths people believe about this disease?
+    - Are there myths about how it spreads?
+    - Are people misinformed about treatment?
+    - What’s a big myth about it?
+    - Are there outdated beliefs still going around?
+    - Do social media myths cause confusion?
+    - What’s one common misunderstanding?
+    - Can you share a false assumption?
+    - Is misinformation common about this?
+- intent: ask_about
+  examples: |
+    - Tell me about [Typhoid](disease)
+    - What is [AES (Chamki Bukhar)](disease)?
+    - Could you explain [Diphtheria](disease) to me?
+    - Share details about [Bird Flu](disease)
+    - Give me information on [Kala-azar](disease)
+    - Can you provide an overview of [HFMD / Tomato Flu](disease)?
+    - I’d like to know more about [Cancer](disease)
+    - Please explain [AIDS (hiv)](disease)
+    - What are the basics of [Piles](disease)?
+    - Describe [Chickenpox](disease)
+    - Could you summarize [Diabetes](disease)?
+    - I need details about [Malaria](disease)
+    - Can you explain [Tuberculosis (TB)](disease)?
+    - What is this disease?
+    - Can you explain this illness?
+    - Tell me more about this sickness
+    - What exactly is this?
+    - Explain it to me in simple words
+    - What is the medical definition of this?
+    - provide an insight of the problem
+    - Give me an overview of the problem
+    - Could you summarize this disease?
+    - Provide a description of it
+    - Tell me the key points about it
+    - I’d like to know more about it
+    - Tell me some details
+    - What can you tell me about this?
+    - I need an explanation
+    - Can you give me the basics of this disease?
+    - Could you outline this problem briefly?
+    - I want to understand this illness better
+- intent: ask_cure
+  examples: |
+    - Is there a cure for [Typhoid](disease)?
+    - How do you cure [AES (Chamki Bukhar)](disease)?
+    - What is the treatment for [Diphtheria](disease)?
+    - Can [Bird Flu](disease) be cured?
+    - Tell me how [Kala-azar](disease) is treated
+    - Is [HFMD / Tomato Flu](disease) curable?
+    - What’s the cure for [Cancer](disease)?
+    - How is [AIDS (hiv)](disease) managed?
+    - Is there medicine for [Piles](disease)?
+    - How do you get rid of [Chickenpox](disease)?
+    - Can [Arthritis](disease) be treated permanently?
+    - What medicine is used for [Tuberculosis (TB)](disease)?
+    - What is the remedy for [Jaundice](disease)?
+    - How do you treat [Malaria](disease)?
+    - What’s the treatment plan for [Diabetes](disease)?
+    - Is there a cure for this?
+    - What is the cure?
+    - Is this condition curable?
+    - Can it be treated?
+    - Is there a permanent remedy for this?
+    - Tell me how it is treated
+    - What’s the line of treatment?
+    - What medications help?
+    - How is it managed medically?
+    - What therapies are available?
+    - How do people recover from it?
+    - What’s the recovery process?
+    - Can this condition be reversed?
+    - How long does treatment take?
+    - How do you get rid of it?
+    - How do hospitals treat it?
+    - What do doctors suggest?
+    - What’s the latest treatment?
+    - Is there a treatment protocol?
+    - Are there home remedies?
+    - Can this be cured naturally?
+    - Is it treatable at home?
+- intent: inform
+  examples: |
+    - [Typhoid](disease)
+    - [AIDS](disease)
+    - [HFMD / Tomato Flu](disease)
+    - [Cardiovascular Disease](disease)
+    - [Malaria](disease)
+    - [COVID-19](disease)
+    - it's about [Cancer](disease)
+    - I was asking about [Piles](disease)
+    - I mean [Diphtheria](disease)
+    - how about [AES](disease)
+    - [Chickenpox](disease) please
+- intent: thankyou
+  examples: |
+    - thanks
+    - thank you
+    - thank you so much
+    - that was helpful
+    - appreciate it
+    - cheers
+    - thanks a lot
+    - many thanks
+    - thanks for the help
+    - great work
+    - that’s kind of you
+    - cool thanks
+    - thank you very much
+    - thanks for the info
+    - big thanks
+- intent: affirm
+  examples: |
+    - rogger
+    - possitive
+    - yes
+    - yup
+    - correct
+    - indeed
+    - that's right
+    - sounds good
+    - absolutely
+    - sure
+    - exactly
+    - of course
+    - right
+    - perfect
+    - true
+    - you got it
+    - definitely
+    - that works
+    - okay
+    - yes please
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - never
+    - that's not right
+    - I don't think so
+    - not really
+    - nah
+    - no way
+    - not at all
+    - wrong
+    - absolutely not
+    - I disagree
+    - no thanks
+    - nope, that’s not correct
+    - not true
+    - not happening
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - are you a robot?
+    - are you real?
+    - who am I chatting with?
+    - are you an AI?
+    - what are you, bot or human?
+    - are you made by humans?
+    - are you a person?
+    - are you real or just code?
+    - tell me, are you AI?
+    - you're not human, are you?
+    - is this automated?
+- intent: out_of_scope
+  examples: |
+    -qwiee
+    -asdasdas
+    -mzxnscnsdkfsdf
+    - what is the weather like today?
+    - can you tell me a joke?
+    - how is the traffic in Bhubaneswar?
+    - who is the prime minister of India?
+    - what is 2+2?
+    - what’s trending on Twitter?
+    - play me a song
+    - what’s the time in New York?
+    - can you cook food?
+    - where is Eiffel Tower?
+    - tell me about cricket scores
+    - open YouTube
+    - what’s your favorite movie?
+    - tell me the stock price of Apple
+    - do my homework
+    - book me a cab
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - heya
+    - good morning
+    - good evening
+    - hey there
+    - hi bot
+    - let's go
+    - howdy
+    - hola
+    - greetings
+    - hi there
+    - yo
+    - hey buddy
+    - hello there
+    - good day
+    - hi friend
+    - hey man
+    - hiya
+    - what's up
+    - wassup
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - good bye
+    - see you
+    - see you later
+    - see ya
+    - cya
+    - catch you later
+    - talk to you later
+    - bye bye
+    - byee
+    - tata
+    - okay bye
+    - ok bye
+    - thanks, bye
+    - good night
+    - take care
+    - have a good day
+    - have a nice day
+    - see you soon
+- intent: ask_outbreak_status
+  examples: |
+    - Are there any outbreaks in [Bhubaneswar](location)?
+    - check for outbreaks in [Cuttack](location)
+    - any disease alerts for [Puri](location)?
+    - What is the current outbreak status in [Ganjam](location)?
+    - Should I be worried about any diseases in [Rourkela](location)?
+    - I want to know about outbreaks in [Khordha](location)
+    - disease report for [Sambalpur](location)
+    - [Baleswar](location) outbreak status
+    - Are there any outbreaks nearby?
+    - check for recent disease alerts
+    - I want to know the outbreak status
+    - Is it safe in my area?
+    - any outbreaks I should know about?
+- synonym: typhoid
+  examples: |
+    - Typhoid fever
+    - motijhara
+- synonym: aes
+  examples: |
+    - AES (Chamki Bukhar)
+    - AES
+    - Chamki Bukhar
+    - Acute Encephalitis Syndrome
+- synonym: diphtheria
+  examples: |
+    - diptheria
+- synonym: bird_flu
+  examples: |
+    - Bird Flu
+    - avian influenza
+- synonym: kala_azar
+  examples: |
+    - Kala-azar
+    - kala azar
+    - black fever
+    - Visceral Leishmaniasis
+- synonym: hfmd_tomato_flu
+  examples: |
+    - HFMD / Tomato Flu
+    - HFMD
+    - Tomato Flu
+    - Hand, Foot, and Mouth Disease
+- synonym: cancer
+  examples: |
+    - cancers
+- synonym: aids_hiv
+  examples: |
+    - AIDS (HIV)
+    - AIDS
+    - HIV
+    - hiv
+- synonym: piles
+  examples: |
+    - hemorrhoids
+- synonym: chickenpox
+  examples: |
+    - varicella
+- synonym: thyroid_disorders
+  examples: |
+    - Thyroid Disorders
+    - thyroid problem
+- synonym: lipoma
+  examples: |
+    - fatty tumor
+- synonym: arthritis
+  examples: |
+    - joint pain
+- synonym: stroke
+  examples: |
+    - brain attack
+    - CVA
+- synonym: diabetes
+  examples: |
+    - sugar
+    - madhumeha
+- synonym: pregnancy
+  examples: |
+    - expecting
+- synonym: malnutrition
+  examples: |
+    - undernutrition
+- synonym: congenital_disorder
+  examples: |
+    - birth defect
+- synonym: cardiovascular_disease
+  examples: |
+    - heart disease
+- synonym: mental_disorder
+  examples: |
+    - mental health issue
+- synonym: dengue
+  examples: |
+    - dengue fever
+- synonym: malaria
+  examples: |
+    - malariya
+- synonym: tuberculosis
+  examples: |
+    - Tuberculosis (TB)
+    - TB
+- synonym: diarrheal_diseases
+  examples: |
+    - diarrhea
+    - loose motion
+- synonym: pneumonia
+  examples: |
+    - lung infection
+- synonym: jaundice
+  examples: |
+    - peeliya
+    - icterus
+- synonym: swine_flu
+  examples: |
+    - H1N1
+- synonym: measles
+  examples: |
+    - Rubeola
+- synonym: covid_19
+  examples: |
+    - covid
+    - corona
+    - coronavirus
+- synonym: scabies
+  examples: |
+    - skin mites
+- lookup: disease
+  examples: |
+    - Typhoid
+    - AES (Chamki Bukhar)
+    - Diphtheria
+    - Bird Flu
+    - Kala-azar
+    - HFMD / Tomato Flu
+    - Cancer
+    - AIDS
+    - Piles
+    - Chickenpox
+    - Thyroid Disorders
+    - Lipoma
+    - Arthritis
+    - Stroke
+    - Diabetes
+    - Pregnancy
+    - Malnutrition
+    - Congenital Disorder
+    - Cardiovascular Disease
+    - Mental Disorder
+    - Dengue
+    - Malaria
+    - Tuberculosis (TB)
+    - Diarrheal Diseases
+    - Pneumonia
+    - Jaundice
+    - Swine Flu
+    - Measles (Rubeola)
+    - COVID-19
+    - Scabies
+    - Typhoid fever
+    - motijhara
+    - AES
+    - Chamki Bukhar
+    - Acute Encephalitis Syndrome
+    - diptheria
+    - avian influenza
+    - kala azar
+    - black fever
+    - Visceral Leishmaniasis
+    - HFMD
+    - Tomato Flu
+    - Hand, Foot, and Mouth Disease
+    - cancers
+    - AIDS
+    - HIV
+    - hiv
+    - hemorrhoids
+    - varicella
+    - thyroid problem
+    - fatty tumor
+    - joint pain
+    - brain attack
+    - CVA
+    - sugar
+    - madhumeha
+    - expecting
+    - undernutrition
+    - birth defect
+    - heart disease
+    - mental health issue
+    - dengue fever
+    - malariya
+    - TB
+    - diarrhea
+    - loose motion
+    - lung infection
+    - peeliya
+    - icterus
+    - H1N1
+    - Rubeola
+    - covid
+    - corona
+    - coronavirus
+    - skin mites
